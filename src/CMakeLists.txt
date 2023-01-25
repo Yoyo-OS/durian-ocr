@@ -66,7 +66,7 @@ if (NOT (${CMAKE_BUILD_TYPE} MATCHES "Debug"))
     qt5_create_translation(LangSrcs ${allSource} ${TargetTsFiles}
         OPTIONS )
 endif()
-qt5_add_translation(${TargetTsFiles})
+#qt5_add_translation(${TargetTsFiles})
 set_source_files_properties(${qmfiles} PROPERTIES OUTPUT_LOCATION "translations")
 
 #QRC file
