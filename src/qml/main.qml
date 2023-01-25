@@ -119,6 +119,7 @@ FishUI.Window {
                     TextEdit{
                         id:edit
                         focus: true
+                        color: FishUI.Theme.textColor
                         wrapMode: Text.WordWrap
                         selectByMouse: true
                         text: ocr.ocrText
