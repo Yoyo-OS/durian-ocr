@@ -34,9 +34,6 @@
 #include <QDBusInterface>
 #include <QDesktopWidget>
 
-#include "controlwidget.h"
-
-
 //判断是否是wayland
 bool CheckWayland()
 {
@@ -69,8 +66,8 @@ int main(int argc, char *argv[])
 //    QScopedPointer<DApplication> app(DApplication::globalApplication(argc, argv));
 //#endif
     QApplication app(argc, argv);
-    app.setOrganizationName("durian");
-    app.setApplicationName("durian-ocr");
+    app.setOrganizationName("yoyo");
+    app.setApplicationName("yoyo-ocr");
 //    app.setProductName(QObject::tr("OCR Tool"));
     app.setApplicationVersion("1.0");
 
@@ -79,7 +76,7 @@ int main(int argc, char *argv[])
 
     QCommandLineOption dbusOption(QStringList() << "u" << "dbus", "Start  from dbus.");
     QCommandLineParser cmdParser;
-    cmdParser.setApplicationDescription("durian-Ocr");
+    cmdParser.setApplicationDescription("yoyo-Ocr");
     cmdParser.addHelpOption();
     cmdParser.addVersionOption();
     cmdParser.addOption(dbusOption);
@@ -90,10 +87,10 @@ int main(int argc, char *argv[])
 
     OcrApplication* instance = OcrApplication::instance();
     QDBusConnection dbus = QDBusConnection::sessionBus();
-    if (dbus.registerService("com.durian.Ocr")) {
+    if (dbus.registerService("com.yoyo.Ocr")) {
         // 第一次启动
         // 注册Dbus服务和对象
-        dbus.registerObject("/com/durian/Ocr", instance);
+        dbus.registerObject("/com/yoyo/Ocr", instance);
         // 初始化适配器
         new DbusOcrAdaptor(instance);
 
@@ -102,23 +99,16 @@ int main(int argc, char *argv[])
             qDebug() << "dbus register waiting!";
             return app.exec();
         }
-
-        if(!instance->openFile(QString(argv[1]))){
-            ControlWidget* widget =new ControlWidget();
-            widget->resize(800,600);
-            widget->show();
-            widget->move(qApp->desktop()->screen()->rect().center() - widget->rect().center());
+        } else {
+            // 第二次运行此应用，
+            // 调用DBus接口，处理交给第一次调用的进程
+            // 本进程退退出
+            OcrInterface *pOcr = new OcrInterface("com.yoyo.Ocr", "/com/yoyo/Ocr", QDBusConnection::sessionBus(), instance);
+            qDebug() << __FUNCTION__ << __LINE__;
+            pOcr->openFile(QString(argv[1]));
+            delete pOcr;
+            return 0;
         }
-    } else {
-        // 第二次运行此应用，
-        // 调用DBus接口，处理交给第一次调用的进程
-        // 本进程退退出
-        OcrInterface *pOcr = new OcrInterface("com.durian.Ocr", "/com/durian/Ocr", QDBusConnection::sessionBus(), instance);
-        qDebug() << __FUNCTION__ << __LINE__;
-        pOcr->openFile(QString(argv[1]));
-        delete pOcr;
-        return 0;
-    }
 
 
 

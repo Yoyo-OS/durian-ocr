@@ -22,8 +22,9 @@
 
 #ifndef OCRAPPLICATION_H
 #define OCRAPPLICATION_H
-
-#include "mainwindow.h"
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include "ocr.h"
 #include <QObject>
 #include <QImage>
 
@@ -46,6 +47,7 @@ public slots:
 
 private:
     explicit OcrApplication(QObject *parent = nullptr);
+    QQmlApplicationEngine m_engine;
     int m_loadingCount{0};//启动次数
 };
 

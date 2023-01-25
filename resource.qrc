@@ -16,5 +16,6 @@
         <file>assets/dict/dict_eng.txt</file>
         <file>assets/dict/dict_chi_tra.txt</file>
         <file>assets/dict/dict_chi_sim.txt</file>
+        <file>src/qml/main.qml</file>
     </qresource>
 </RCC>

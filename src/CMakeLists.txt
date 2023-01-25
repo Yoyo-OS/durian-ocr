@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(durian-ocr)
+project(yoyo-ocr)
 
 #for Qt
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -8,7 +8,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-set(QtModule Core Gui Widgets DBus LinguistTools)
+set(QtModule Core Gui Widgets Quick DBus LinguistTools)
 
 if(DOTEST)
     set(QtModule ${QtModule} Test)
@@ -91,11 +91,9 @@ if(DOTEST)
         "./frame.cpp"
         "./loadingwidget.cpp"
         "./ocrapplication.cpp"
-        "./mainwidget.cpp"
-        "./mainwindow.cpp"
+        "./ocr.cpp"
         "./resulttextview.cpp"
         "./textloadwidget.cpp"
-        "./controlwidget.cpp"
         )
 
     add_executable(${PROJECT_NAME_TEST} ${allHeaders} ${allTestSource} ${allTestSource1} ${AllQRC})
@@ -167,7 +165,7 @@ install(TARGETS ${PROJECT_NAME}
         INCLUDES DESTINATION allHeaders)
 
 install(FILES ${LangSrcs} DESTINATION ${TranslationDir})
-install(FILES ../durian-ocr.desktop DESTINATION ${DesktopDir})
-install(FILES ../assets/durian-ocr.svg DESTINATION ${AppIconDir})
-install(FILES ../com.durian.Ocr.service DESTINATION ${DBusServiceDir})
+install(FILES ../yoyo-ocr.desktop DESTINATION ${DesktopDir})
+install(FILES ../assets/yoyo-ocr.svg DESTINATION ${AppIconDir})
+install(FILES ../com.yoyo.Ocr.service DESTINATION ${DBusServiceDir})
 install(DIRECTORY ../assets/model DESTINATION ${ModelDir})

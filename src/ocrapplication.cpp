@@ -20,7 +20,7 @@
 */
 
 #include "ocrapplication.h"
-#include "mainwindow.h"
+#include "ocr.h"
 #include "paddleocr-ncnn/paddleocr.h"
 //#include <DWidgetUtil>
 #include <QDebug>
@@ -39,25 +39,19 @@ OcrApplication *OcrApplication::instance()
 
 OcrApplication::OcrApplication(QObject *parent) : QObject(parent)
 {
-
+    qmlRegisterType<Ocr>("Yoyo.Ocr", 1, 0, "Ocr");
+    m_engine.addImportPath(QStringLiteral("qrc:/"));
+    m_engine.load(QUrl(QStringLiteral("qrc:/src/qml/main.qml")));
 }
 
 bool OcrApplication::openFile(QString filePath)
 {
     qDebug() << __FUNCTION__ << __LINE__ << filePath;
+    QObject *mainObject = m_engine.rootObjects().first();
     bool bRet = false;
     if (!PaddleOCRApp::instance()->isRunning()) {
-        MainWindow *win = new MainWindow();
-        //增加判断，空图片不会启动
-        bRet = win->openFile(filePath);
-        if (bRet) {
-            win->show();
-            //第一次启动才居中
-            if (m_loadingCount == 0) {
-//                Dtk::Widget::moveToCenter(win);
-                win->move(qApp->desktop()->screen()->rect().center() - win->rect().center());
-                m_loadingCount++;
-            }
+        if (mainObject) {
+            QMetaObject::invokeMethod(mainObject, "openImage", Q_ARG(QVariant, filePath));
         }
     } else {
         qDebug() << "正在识别中！";
@@ -68,19 +62,13 @@ bool OcrApplication::openFile(QString filePath)
 
 void OcrApplication::openImage(QImage image)
 {
+    QObject *mainObject = m_engine.rootObjects().first();
     //增加判断，空图片不会启动
     if (!image.isNull() && image.width() >= 1) {
         qDebug() << __FUNCTION__ << __LINE__ << image.size();
         if (!PaddleOCRApp::instance()->isRunning()) {
-            MainWindow *win = new MainWindow();
+            Ocr *win = new Ocr();
             win->openImage(image);
-            win->show();
-            //第一次启动才居中
-            if (m_loadingCount == 0) {
-//                Dtk::Widget::moveToCenter(win);
-                win->move(qApp->desktop()->screen()->rect().center() - win->rect().center());
-                m_loadingCount++;
-            }
         } else {
             qDebug() << "正在识别中！";
         }
@@ -92,15 +80,8 @@ void OcrApplication::openImageAndName(QImage image, QString imageName)
     //增加判断，空图片不会启动
     if (!image.isNull() && image.width() >= 1) {
         if (!PaddleOCRApp::instance()->isRunning()) {
-            MainWindow *win = new MainWindow();
+            Ocr *win = new Ocr();
             win->openImage(image, imageName);
-            win->show();
-            //第一次启动才居中
-            if (m_loadingCount == 0) {
-//                Dtk::Widget::moveToCenter(win);
-                win->move(qApp->desktop()->screen()->rect().center() - win->rect().center());
-                m_loadingCount++;
-            }
         } else {
             qDebug() << "正在识别中！";
         }
