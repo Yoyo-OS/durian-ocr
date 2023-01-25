@@ -39,3 +39,7 @@ debian/deepin-image-viewer.substvars
 !debian/control
 !debian/compat
 !debian/source/*
+debian/debhelper*
+debian/files
+debian/yoyo-ocr*
+obj-x86_64*
