@@ -94,12 +94,12 @@ int main(int argc, char *argv[])
         // 初始化适配器
         new DbusOcrAdaptor(instance);
 
-        if (cmdParser.isSet(dbusOption)) {
-            // 第一调用已 --dbus参数启动
-            qDebug() << "dbus register waiting!";
-            return app.exec();
+        if(QString(argv[1]) != "")
+        {
+            instance->openFile(QString(argv[1]));
         }
-        } else {
+
+    } else {
             // 第二次运行此应用，
             // 调用DBus接口，处理交给第一次调用的进程
             // 本进程退退出
