@@ -88,12 +88,8 @@ if(DOTEST)
     aux_source_directory(../3rdparty/clipper allTestSource)
 
     FILE(GLOB allTestSource1
-        "./frame.cpp"
-        "./loadingwidget.cpp"
         "./ocrapplication.cpp"
         "./ocr.cpp"
-        "./resulttextview.cpp"
-        "./textloadwidget.cpp"
         )
 
     add_executable(${PROJECT_NAME_TEST} ${allHeaders} ${allTestSource} ${allTestSource1} ${AllQRC})

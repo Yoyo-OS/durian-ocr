@@ -1,15 +1,8 @@
 <RCC>
     <qresource prefix="/">
-        <file>assets/tip_dark.svg</file>
-        <file>assets/tip_light.svg</file>
         <file>assets/download_light.svg</file>
         <file>assets/icon_toast_sucess_new.svg</file>
         <file>assets/download_dark.svg</file>
-        <file>assets/distinguish_normal_light.svg</file>
-        <file>assets/distinguish_normal_dark.svg</file>
-        <file>assets/distinguish_light.svg</file>
-        <file>assets/distinguish_dark.svg</file>
-        <file>assets/appicon_dark.svg</file>
         <file>assets/yoyo-ocr.svg</file>
         <file>assets/copy_dark.svg</file>
         <file>assets/copy_light.svg</file>
@@ -17,5 +10,7 @@
         <file>assets/dict/dict_chi_tra.txt</file>
         <file>assets/dict/dict_chi_sim.txt</file>
         <file>src/qml/main.qml</file>
+        <file>assets/open_light.svg</file>
+        <file>assets/open_dark.svg</file>
     </qresource>
 </RCC>

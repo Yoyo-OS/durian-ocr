@@ -1,7 +1,5 @@
 #include "ocr.h"
 #include "view/imageview.h"
-#include "loadingwidget.h"
-#include "frame.h"
 
 #include <QtCore/QVariant>
 #include <QTextBlock>
@@ -117,11 +115,21 @@ void Ocr::deleteLoadingUi()
 
 bool Ocr::openImage(const QString &path)
 {
+    qDebug()<<"Open "+path;
     bool bRet = false;
-    QImage img(path);
+    QString m_path;
+    m_path = path;
+    if(path.startsWith("file://"))
+    {
+        m_path.remove(0,6);
+    }
+    QImage img(m_path);
     if (!img.isNull()) {
-        m_imgName = path;
-        m_imgPath = "file://" + path;
+        m_imgName = m_path;
+        if(!path.startsWith("file://"))
+        {
+            m_imgPath = "file://" + m_path;
+        }
         emit imgNameChanged();
         openImage(img, m_imgName);
         bRet = true;

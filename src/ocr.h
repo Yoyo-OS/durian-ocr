@@ -4,9 +4,7 @@
 #include <QMutex>
 #include <QApplication>
 #include <QClipboard>
-#include "resulttextview.h"
 
-#include "textloadwidget.h"
 #include "paddleocr-ncnn/paddleocr.h"
 
 class Frame;
