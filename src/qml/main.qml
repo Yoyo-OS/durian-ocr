@@ -17,7 +17,7 @@ FishUI.Window {
     minimumWidth: 600
     minimumHeight: 500
 
-    header.height: 36 + FishUI.Units.largeSpacing
+    header.height: 40
     contentTopMargin: 0
 
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
@@ -40,9 +40,9 @@ FishUI.Window {
             ComboBox {
                 id:type
                 width: 100
+                height: 30
+                padding: 0
                 model: ["简体中文","繁体中文","English"]
-                leftPadding: FishUI.Units.largeSpacing
-                rightPadding: FishUI.Units.largeSpacing
                 topInset: 0
                 bottomInset: 0
                 currentIndex: 0
@@ -55,6 +55,7 @@ FishUI.Window {
                 icon.width: height
                 icon.height: height
                 width: height
+                height: 30
                 onClicked: fileDialog.open()
             }
             Button{
@@ -62,6 +63,7 @@ FishUI.Window {
                 icon.width: height
                 icon.height: height
                 width: height
+                height: 30
                 onClicked: ocr.copy()
             }
         }
@@ -70,7 +72,7 @@ FishUI.Window {
 
         Rectangle {
             anchors.fill: parent
-            anchors.topMargin: rootWindow.header.height + FishUI.Units.smallSpacing * 1.5
+            anchors.topMargin: rootWindow.header.height + FishUI.Units.smallSpacing
             color: FishUI.Theme.backgroundColor
             radius: FishUI.Theme.bigRadius
             DropArea {
@@ -159,7 +161,7 @@ FishUI.Window {
                             TextArea {
                                 id: contentText
                                 wrapMode: TextArea.WrapAnywhere
-                                font.pixelSize: 18
+                                font.pixelSize: 14
                                 selectByMouse: true
                                 text: ocr.ocrText
                                 color: FishUI.Theme.textColor
