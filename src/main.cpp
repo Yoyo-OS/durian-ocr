@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 //    QScopedPointer<DApplication> app(DApplication::globalApplication(argc, argv));
 //#endif
     QApplication app(argc, argv);
-    app.setOrganizationName("yoyo");
+    app.setOrganizationName("yoyoos");
     app.setApplicationName("yoyo-ocr");
 //    app.setProductName(QObject::tr("OCR Tool"));
     app.setApplicationVersion("1.0");
