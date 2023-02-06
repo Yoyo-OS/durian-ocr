@@ -38,9 +38,9 @@ QT_END_NAMESPACE
 class DbusOcrAdaptor: public QDBusAbstractAdaptor
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "com.durian.Ocr")
+    Q_CLASSINFO("D-Bus Interface", "com.yoyo.Ocr")
     Q_CLASSINFO("D-Bus Introspection", ""
-                                       "  <interface name=\"com.durian.Ocr\">\n"
+                                       "  <interface name=\"com.yoyo.Ocr\">\n"
 
                                        "    <method name=\"openImage\">\n"
                                        "      <arg direction=\"in\" type=\"ay\" name=\"openImage\"/>\n"

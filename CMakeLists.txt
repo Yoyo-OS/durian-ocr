@@ -10,5 +10,5 @@ if(DOTEST)
     add_definitions(-DIN_TEST)
 endif()
 
-#durian-ocr
+#yoyo-ocr
 add_subdirectory(src)
